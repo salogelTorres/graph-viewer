@@ -14,7 +14,7 @@ To use `graph-viewer` in your Rust project, add the following to your `Cargo.tom
 
 ```toml
 [dependencies]
-graph-viewer = "0.1.0" # Replace with the actual version
+graph-viewer = { git = "https://github.com/salogelTorres/graph-viewer", tag = "vx.x.x" }
 ```
 
 ## Usage
