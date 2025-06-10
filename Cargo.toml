@@ -1,0 +1,15 @@
+[package]
+name = "graph-viewer"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+petgraph = "0.6"
+petgraph-graphml = "3.1"
+quick-xml = "0.30"
+egui = "0.22"
+eframe = "0.22"
+
+# Añade esto para que winapi compile con winuser y windef
+winapi = { version = "0.3", features = ["winuser", "windef"] }
+walkdir = "2.5.0"
