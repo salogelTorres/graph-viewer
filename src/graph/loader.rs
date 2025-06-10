@@ -134,6 +134,7 @@ pub fn load_graphml(path: &str) -> Result<Graph<NodeData, EdgeData>, LoadError> 
                             let idx = graph.add_node(NodeData { 
                                 id: node_id.clone(), 
                                 label: label.unwrap_or(node_id.clone()),
+                                position: [0.0, 0.0],
                             });
                             id_map.insert(node_id, idx);
                         }
@@ -175,7 +176,7 @@ pub fn load_graphml(path: &str) -> Result<Graph<NodeData, EdgeData>, LoadError> 
                     // End of a node tag (non-empty), finalize NodeData
                     if let Some(id) = current_node_id.take() {
                         let label = current_node_label.take().unwrap_or(id.clone());
-                        let idx = graph.add_node(NodeData { id: id.clone(), label });
+                        let idx = graph.add_node(NodeData { id: id.clone(), label, position: [0.0, 0.0] });
                         id_map.insert(id, idx);
                     }
                 }

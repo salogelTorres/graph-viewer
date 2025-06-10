@@ -52,17 +52,18 @@ impl App for GraphViewerApp {
             self.state.zoom *= 1.0 + zoom_delta * 0.01;
             // Draw edges
             for edge in self.state.graph.edge_references() {
-                let [x1, y1] = self.state.positions[&edge.source()];
-                let [x2, y2] = self.state.positions[&edge.target()];
+                let [x1, y1] = self.state.graph[edge.source()].position;
+                let [x2, y2] = self.state.graph[edge.target()].position;
                 let p1 = Pos2::new(x1 * self.state.zoom + self.state.pan[0], y1 * self.state.zoom + self.state.pan[1]);
                 let p2 = Pos2::new(x2 * self.state.zoom + self.state.pan[0], y2 * self.state.zoom + self.state.pan[1]);
                 painter.line_segment([p1, p2], (2.0, ui.visuals().text_color()));
             }
+            let node_radius = 25.0;
             // Draw nodes
             for node in self.state.graph.node_indices() {
-                let [x, y] = self.state.positions[&node];
+                let [x, y] = self.state.graph[node].position;
                 let pos = Pos2::new(x * self.state.zoom + self.state.pan[0], y * self.state.zoom + self.state.pan[1]);
-                painter.circle_filled(pos, 10.0, ui.visuals().widgets.inactive.bg_fill);
+                painter.circle_filled(pos, node_radius, ui.visuals().widgets.inactive.bg_fill);
                 painter.text(pos, egui::Align2::CENTER_CENTER, &self.state.graph[node].label, egui::TextStyle::Body.resolve(ui.style()), ui.visuals().text_color());
             }
         });
