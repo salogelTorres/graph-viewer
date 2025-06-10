@@ -19,13 +19,36 @@ graph-viewer = { git = "https://github.com/salogelTorres/graph-viewer", tag = "v
 
 ## Usage
 
-To run the graph viewer with an example GraphML file:
+To run the graph viewer as a standalone application with an example GraphML file:
 
 ```bash
 cargo run --bin visualize_graph -- <path_to_your_graphml_file>
 ```
 
 Replace `<path_to_your_graphml_file>` with the actual path to your `.graphml` file.
+
+### Programmatic Usage
+
+To use the `graph-viewer` library within your own Rust application, you can load a GraphML file and run the viewer as follows:
+
+First, ensure you have `graph-viewer` as a dependency in your `Cargo.toml`:
+
+```toml
+[dependencies]
+graph-viewer = { git = "https://github.com/salogelTorres/graph-viewer", tag = "v0.1.0" }# Or the latest version
+```
+
+Then, in your `main.rs` or `lib.rs` file:
+
+```rust
+use graph_viewer::graph::ui::run_viewer;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let graph_file_path = "example.graphml";
+    let _ = run_viewer(graph_file_path);
+    Ok(())
+}
+```
 
 ## License
 
